@@ -184,4 +184,11 @@ describe 'CompetitionRankingLeaderboard' do
       expect(leaders[2][:member]).to eql('member_25')
     end
   end
+
+  context 'ranks' do
+    it 'should return nil rank for unranked mamebr' do
+      leaderboard = CompetitionRankingLeaderboard.new('ranks', Leaderboard::DEFAULT_OPTIONS, {:host => "127.0.0.1", :db => 15})
+      expect(leaderboard.rank_for('unranked_member')).to eq(nil)
+    end
+  end
 end

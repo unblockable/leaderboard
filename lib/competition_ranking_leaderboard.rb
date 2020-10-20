@@ -9,6 +9,8 @@ class CompetitionRankingLeaderboard < Leaderboard
   # @return the rank for a member in the leaderboard.
   def rank_for_in(leaderboard_name, member)
     member_score = score_for_in(leaderboard_name, member)
+    return nil if member_score.nil?
+
     if @reverse
       return @redis_connection.zcount(leaderboard_name, '-inf', "(#{member_score}") + 1 rescue nil
     else
